@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+	  xmlns:layout="http://www.w3.org/1999/xhtml">
+
+<head th:insert="layouts/fragments/scripts :: head" />
+
+<body class="hold-transition skin-green-light layout-top-nav">
+	<!-- Site wrapper -->
+	<div class="wrapper">
+
+		<header class="main-header">
+			<div th:insert="layouts/fragments/static-top :: items"/>
+		</header>
+
+		<div class="content-wrapper">
+			<div layout:fragment="content-header"/>
+
+			<section class="content-header" th:if="${message}">
+				<div class="callout callout-success lead">
+	                <p th:text="${message}"></p>
+				</div>
+			</section>
+
+            <div layout:fragment="content"/>
+		</div>
+		<!-- /.content-wrapper -->
+		<div th:insert="layouts/fragments/footer :: main"/>
+
+	</div>
+	<!-- ./wrapper -->
+
+
+	<div th:insert="layouts/fragments/scripts :: javascripts" />
+	<div th:insert="layouts/fragments/search :: body" />
+
+
+
+
+</body>
+</html>

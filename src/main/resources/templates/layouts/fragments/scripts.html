@@ -1,0 +1,123 @@
+<head th:fragment="head">
+  <title th:text="#{head.title}"></title>
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    name="viewport"
+  />
+
+  <meta
+  	th:if="${@environment.getActiveProfiles()[0] != 'development'}"
+    http-equiv="Content-Security-Policy"
+    content="upgrade-insecure-requests"
+  />
+
+  <!-- Bootstrap 3.3.6 -->
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/webjars/bootstrap/3.3.7/dist/css/bootstrap.min.css"
+  />
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/webjars/font-awesome/4.5.0/css/font-awesome.min.css"
+  />
+  <!-- Ionicons -->
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/webjars/ionicons/2.0.1/css/ionicons.min.css"
+  />
+  <!-- Theme style -->
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/webjars/adminlte/2.3.11/dist/css/AdminLTE.min.css"
+  />
+  <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/webjars/adminlte/2.3.11/dist/css/skins/_all-skins.min.css"
+  />
+  <!--  CUSTOM CSS -->
+  <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}" />
+  <!-- DataTable -->
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/webjars/adminlte/2.3.11/plugins/datatables/jquery.dataTables_themeroller.css"
+  />
+
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/webjars/adminlte/2.3.11/plugins/datatables/dataTables.bootstrap.css"
+  />
+
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/webjars/adminlte/2.3.11/plugins/select2/select2.min.css"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/webjars/adminlte/2.3.11/plugins/fullcalendar/fullcalendar.css"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/webjars/adminlte/2.3.11/plugins/fullcalendar/fullcalendar.min.css"
+  />
+
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="/webjars/summernote/0.8.2/dist/summernote.css"
+  />
+
+  <link rel="stylesheet" type="text/css" href="/css/search.css" />
+
+  <th:block layout:fragment="css-view" />
+</head>
+
+<div th:fragment="javascripts">
+  <!-- jQuery 2.2.3 -->
+  <script src="/webjars/jquery/2.2.3/jquery.min.js"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="/webjars/bootstrap/3.3.7/dist/js/bootstrap.min.js"></script>
+  <!-- SlimScroll -->
+  <script src="/webjars/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+  <!-- FastClick -->
+  <script src="/webjars/fastclick/1.0.6/fastclick.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/webjars/adminlte/2.3.11/dist/js/app.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="/webjars/adminlte/2.3.11/dist/js/demo.js"></script>
+  <!-- Datatables script -->
+
+  <script src="/webjars/adminlte/2.3.11/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="/webjars/adminlte/2.3.11/plugins/select2/select2.min.js"></script>
+  <script src="/webjars/adminlte/2.3.11/plugins/datatables/dataTables.bootstrap.min.js"></script>
+  <script src="/webjars/adminlte/2.3.11/plugins/jQueryUI/jquery-ui.min.js"></script>
+  <script src="/webjars/jquery-ui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  <script src="/webjars/adminlte/2.3.11/plugins/daterangepicker/moment.min.js"></script>
+  <script src="/webjars/adminlte/2.3.11/plugins/daterangepicker/moment.js"></script>
+
+
+  <!-- Summernote JS -->
+  <script src="/webjars/summernote/0.8.2/dist/summernote.js"></script>
+
+  <!-- Search -->
+  <script src="/js/search.js"></script>
+  <script th:inline="javascript">
+    let searchMessage = /*[[#{search.noResults}]]*/ "defaultanyvalue";
+    initSearch(searchMessage);
+  </script>
+  <th:block layout:fragment="js-view" />
+</div>

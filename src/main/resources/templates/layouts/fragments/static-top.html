@@ -1,0 +1,123 @@
+<div th:fragment="items" xmlns:th="http://www.w3.org/1999/xhtml">
+
+
+    <nav class="navbar navbar-static-top">
+        <div class="container" style="margin-left: 10px; margin-right: 10px;width: 98%">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand" style="padding: 10px 15px">
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"><img src="/img/logo2.png" style="width: 2em" /> <b>Parcerias</b>IFRS</span>
+                </a>
+
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="navbar-collapse pull-left collapse" id="navbar-collapse" aria-expanded="false" style="height: 1px;">
+                <ul class="nav navbar-nav">
+
+
+                    <!--PARTNERS-->
+                    <li class="dropdown d-flex">
+                        <a href="#" th:text="#{menu.partner}"/>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" ><span class="caret"/></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a th:href="@{/lead/list}" href="#" th:text="#{menu.lead}"/></li>
+                            <li class="divider"></li>
+                            <li><a th:href="@{/account/list}" href="#" th:text="#{menu.account}"/></li>
+                            <li class="divider"></li>
+                            <li><a th:href="@{/contact/list}" href="#" th:text="#{menu.contact}"/></li>
+                        </ul>
+                    </li>
+                    <!--/PARTNERS-->
+
+                    <!--PIPELINE-->
+                    <li class="dropdown d-flex">
+                        <a href="#" th:text="#{menu.pipeline}"/>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" ><span class="caret"/></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a th:href="@{/opportunity/list}" href="#" th:text="#{menu.opportunity}"/></li>
+                            <li class="divider"></li>
+                            <li><a th:href="@{/case/list}" href="#" th:text="#{menu.case}"/></li>
+                        </ul>
+                    </li>
+                    <!--/PIPELINE-->
+
+                    <!--TASKS-->
+                    <li class="dropdown d-flex">
+                        <a href="#" th:href="@{/task/list}" th:text="#{menu.task}"/>
+                    </li>
+                    <!--/TASKS-->
+
+                    <!--FILE-->
+                    <li class="dropdown d-flex">
+                        <a href="#" th:href="@{/file/list}" th:text="#{menu.file}"/>
+                    </li>
+                    <!--/FILE-->
+                    
+                    <li sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown d-flex">
+                        <a href="/admin/painel" th:text="#{menu.admin}"/>
+                    </li>
+                    
+                </ul>
+                <!--<form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="navbar-search-input" placeholder="Search">
+                    </div>
+                </form>-->
+            </div>
+            <!-- /.navbar-collapse -->
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu pull-right">
+                <ul class="nav navbar-nav">
+
+                    <li id="search-menu-item">
+                        <p class="navbar-btn">
+                            <button href="#" class="btn btn-success" style="border-radius: 40px; background-color:#008d4c"
+                            		id="search-modal-toggle" data-toggle="modal" data-target="#search-modal">
+                                <span class="fa fa-search"></span>
+                            </button>
+                        </p>
+                    </li>
+
+                    <!--USER-MENU-->
+                    <li class="dropdown user user-menu" id="user-info">
+                        <a href="#" class="dropdown-toggle " data-toggle="dropdown">
+                            <img class="user-image" th:src="${#authentication.principal.user.picture?.pictureBase64}" alt="User Image" />
+                            <span class="hidden-xs" th:text="${#authentication.principal.user.name}"/>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!--USER-IMAGE-->
+                            <li class="user-header">
+                                <img src="/photos/no_image_available.png" class="img-circle" alt="User Image"
+                                     th:src="${#authentication.principal.user.picture?.pictureBase64}">
+                                <p>
+                                    <span class="hidden-xs" th:text="${#authentication.principal.user.name}"/>
+                                </p>
+                            </li>
+                            <!--/USER-IMAGE-->
+                            <!-- MENU-FOOTER-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat"  th:href="@{/user/profile}" th:text="#{user.profile}"></a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="#" th:href="@{/logout}" id="logout-button"
+                                       class="btn btn-default btn-flat" th:text="#{user.signout}"></a>
+                                </div>
+                            </li>
+                            <!--/MENU-FOOTER-->
+                        </ul>
+                    </li>
+                    <!--/USER-MENU-->
+                </ul>
+            </div>
+            <!-- /.navbar-custom-menu -->
+
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+</div>
