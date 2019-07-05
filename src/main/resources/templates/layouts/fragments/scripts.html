@@ -8,11 +8,6 @@
     name="viewport"
   />
 
-  <meta
-  	th:if="${@environment.getActiveProfiles()[0] != 'development'}"
-    http-equiv="Content-Security-Policy"
-    content="upgrade-insecure-requests"
-  />
 
   <!-- Bootstrap 3.3.6 -->
   <link
@@ -44,9 +39,7 @@
     type="text/css"
     href="/webjars/adminlte/2.3.11/dist/css/skins/_all-skins.min.css"
   />
-  <!--  CUSTOM CSS -->
-  <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}" />
-  <!-- DataTable -->
+ <!-- DataTable -->
   <link
     rel="stylesheet"
     type="text/css"
@@ -64,24 +57,6 @@
     type="text/css"
     href="/webjars/adminlte/2.3.11/plugins/select2/select2.min.css"
   />
-  <link
-    rel="stylesheet"
-    type="text/css"
-    href="/webjars/adminlte/2.3.11/plugins/fullcalendar/fullcalendar.css"
-  />
-  <link
-    rel="stylesheet"
-    type="text/css"
-    href="/webjars/adminlte/2.3.11/plugins/fullcalendar/fullcalendar.min.css"
-  />
-
-  <link
-    rel="stylesheet"
-    type="text/css"
-    href="/webjars/summernote/0.8.2/dist/summernote.css"
-  />
-
-  <link rel="stylesheet" type="text/css" href="/css/search.css" />
 
   <th:block layout:fragment="css-view" />
 </head>
@@ -104,20 +79,5 @@
   <script src="/webjars/adminlte/2.3.11/plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="/webjars/adminlte/2.3.11/plugins/select2/select2.min.js"></script>
   <script src="/webjars/adminlte/2.3.11/plugins/datatables/dataTables.bootstrap.min.js"></script>
-  <script src="/webjars/adminlte/2.3.11/plugins/jQueryUI/jquery-ui.min.js"></script>
-  <script src="/webjars/jquery-ui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-  <script src="/webjars/adminlte/2.3.11/plugins/daterangepicker/moment.min.js"></script>
-  <script src="/webjars/adminlte/2.3.11/plugins/daterangepicker/moment.js"></script>
-
-
-  <!-- Summernote JS -->
-  <script src="/webjars/summernote/0.8.2/dist/summernote.js"></script>
-
-  <!-- Search -->
-  <script src="/js/search.js"></script>
-  <script th:inline="javascript">
-    let searchMessage = /*[[#{search.noResults}]]*/ "defaultanyvalue";
-    initSearch(searchMessage);
-  </script>
   <th:block layout:fragment="js-view" />
 </div>

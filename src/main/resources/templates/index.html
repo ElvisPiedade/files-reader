@@ -1,0 +1,75 @@
+<html layout:decorate="~{layouts/main}"
+	xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.w3.org/1999/xhtml">
+
+<div th:insert="layouts/fragments/scripts :: head" />
+
+
+
+<section class="invoice">
+	<!-- title row -->
+	<div class="row">
+		<div class="col-xs-6">
+			<h2 class="page-header">
+				<i class="fa fa-globe"></i> AdminLTE, Inc. <small class="pull-right">Date:
+					2/10/2014</small>
+			</h2>
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- info row -->
+
+	<div class="row">
+		<div class="col-xs-6">
+			<form role="form" action="/file/upload" method="post" enctype="multipart/form-data">
+				<div class="box-body">
+					<div class="form-group">
+						<label for="exampleInputFile">File input</label> <input
+							type="file" id="exampleInputFile" multiple="multiple" name="content">
+					</div>
+				</div>
+				<!-- /.box-body -->
+
+				<div class="box-footer">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<!-- /.col -->
+		<div class="col-xs-6">
+			<p class="lead">Amount Due 2/22/2014</p>
+
+			<div class="table-responsive">
+				<table class="table">
+					<tbody>
+						<tr>
+							<th style="width: 50%">Quantidade de Clientes:</th>
+							<td>$250.30</td>
+						</tr>
+						<tr>
+							<th>Quantidade de Vendedores</th>
+							<td>$10.34</td>
+						</tr>
+						<tr>
+							<th>Venda mais cara</th>
+							<td>$5.80</td>
+						</tr>
+						<tr>
+							<th>Pior vendedor</th>
+							<td>$265.24</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+
+</section>
+
+</html>
