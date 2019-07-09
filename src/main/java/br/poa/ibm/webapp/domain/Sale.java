@@ -15,7 +15,6 @@ import lombok.Data;
 public class Sale {
 
 	@Id
-	@GeneratedValue
 	private Long id;
 
 	@OneToMany(mappedBy = "sale")

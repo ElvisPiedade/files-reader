@@ -21,7 +21,7 @@ public class Vendor {
 
 	private String cpf;
 
-	private String Name;
+	private String name;
 
 	private Double salary;
 

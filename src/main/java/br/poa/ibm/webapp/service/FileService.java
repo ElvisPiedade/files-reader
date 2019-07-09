@@ -1,15 +1,17 @@
 package br.poa.ibm.webapp.service;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.poa.ibm.webapp.domain.File;
-import br.poa.ibm.webapp.domain.Vendor;
 import br.poa.ibm.webapp.repository.FileRepository;
 
 @Service
@@ -21,13 +23,55 @@ public class FileService {
 		this.fileRepository = fileRepository;
 	}
 
-	public void save(File file) {
-		fileRepository.save(file);
+	public Map<String, List<String>> save(File file, Set<MultipartFile> myFile) throws IOException {
+		Map<String, List<String>> values = new HashMap<String, List<String>>();
 
+		for (MultipartFile f : myFile) {
+			file = File.builder()
+					.content(f.getBytes())
+					.contentType(f.getContentType())
+					.createdOn(new Date())
+					.build();
+
+			fileRepository.save(file);
+			values = this.readFile(file);
+		}
+
+		return values;
 
 	}
 
+	public Map<String, List<String>> readFile(File file) throws IOException {
+		String s = new String(file.getContent(), "ISO-8859-1");
+		String lines[] = s.split("\\r?\\n");
+		List<String> listVendor = new ArrayList<String>();
+		List<String> listCustomer = new ArrayList<String>();
+		List<String> listSale = new ArrayList<String>();
+		Map<String, List<String>> values = new HashMap<String, List<String>>();
 
+		for (String string : lines) {
+			String att[] = string.split("ç");
 
+			switch (att[0]) {
+			case "001":
+				listVendor.add(string);
+				break;
+			case "002":
+				listCustomer.add(string);
+				break;
+			case "003":
+				listSale.add(string);
+				break;
+			default:
+				System.out.println("printa alguma coisa");
+			}
+		}
+		values.put("001", listVendor);
+		values.put("002", listCustomer);
+		values.put("003", listSale);
+
+		return values;
+
+	}
 
 }

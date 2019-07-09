@@ -20,5 +20,18 @@ public class VendorService {
 		return vendorRepository.findAll();
 	}
 
+	public void save(List<String> list) {
+
+		for (String string : list) {
+			Vendor vendor = new Vendor();
+			String[] arr = string.split("ç");
+			vendor.setCpf(arr[1]);
+			vendor.setName(arr[2]);
+			vendor.setSalary(Double.parseDouble(arr[3]));
+
+			vendorRepository.save(vendor);
+		}
+	}
+
 
 }

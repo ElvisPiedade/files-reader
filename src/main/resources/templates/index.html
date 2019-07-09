@@ -21,11 +21,11 @@
 
 	<div class="row">
 		<div class="col-xs-6">
-			<form role="form" action="/file/upload" method="post" enctype="multipart/form-data">
+			<form th:action="@{/file/upload}" th:object="${newFile}" method="post" enctype="multipart/form-data">
 				<div class="box-body">
 					<div class="form-group">
 						<label for="exampleInputFile">File input</label> <input
-							type="file" id="exampleInputFile" multiple="multiple" name="content">
+							type="file" id="exampleInputFile" multiple="multiple" name="myFile">
 					</div>
 				</div>
 				<!-- /.box-body -->

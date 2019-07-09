@@ -8,4 +8,6 @@ import br.poa.ibm.webapp.domain.Vendor;
 @Repository
 public interface VendorRepository extends JpaRepository<Vendor, Long>{
 
+	Vendor findByName(String name);
+
 }

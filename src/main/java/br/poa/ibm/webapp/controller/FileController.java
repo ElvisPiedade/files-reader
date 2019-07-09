@@ -1,8 +1,18 @@
 package br.poa.ibm.webapp.controller;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.poa.ibm.webapp.domain.File;
@@ -32,9 +42,14 @@ public class FileController {
 	}
 
 	@PostMapping("/upload")
-	public ModelAndView uploadFiles(File file) {
-		ModelAndView mav = new ModelAndView("");
-		fileService.save(file);
+	public ModelAndView uploadFiles(@ModelAttribute @Valid File file,
+			@RequestParam(value="myFile", required=false) Set<MultipartFile> myFile) throws IOException {
+		ModelAndView mav = new ModelAndView("redirect:/");
+		Map<String, List<String>> values = fileService.save(file, myFile);
+
+		vendorService.save(values.get("001"));
+		customerService.save(values.get("002"));
+		saleService.save(values.get("003"));
 		mav.addObject("customers", customerService.findAll());
 		mav.addObject("vendors", vendorService.findAll());
 

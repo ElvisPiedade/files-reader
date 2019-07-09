@@ -13,7 +13,6 @@ import lombok.Data;
 public class Product {
 
 	@Id
-	@GeneratedValue
 	private Long id;
 
 	private Long quantity;
