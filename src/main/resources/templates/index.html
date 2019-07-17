@@ -21,7 +21,7 @@
 
 	<div class="row">
 		<div class="col-xs-6">
-			<form th:action="@{/file/upload}" th:object="${newFile}" method="post" enctype="multipart/form-data">
+			<form th:action="@{/file/upload}" th:object="${File}" method="post" enctype="multipart/form-data">
 				<div class="box-body">
 					<div class="form-group">
 						<label for="exampleInputFile">File input</label> <input
@@ -48,19 +48,19 @@
 					<tbody>
 						<tr>
 							<th style="width: 50%">Quantidade de Clientes:</th>
-							<td>$250.30</td>
+							<td th:text="${#lists.size(customers)}"></td>
 						</tr>
 						<tr>
 							<th>Quantidade de Vendedores</th>
-							<td>$10.34</td>
+							<td th:text="${#lists.size(vendors)}"></td>
 						</tr>
 						<tr>
 							<th>Venda mais cara</th>
-							<td>$5.80</td>
+							<td th:text="${expensive}"></td>
 						</tr>
 						<tr>
 							<th>Pior vendedor</th>
-							<td>$265.24</td>
+							<td th:text="${worse}"></td>
 						</tr>
 					</tbody>
 				</table>

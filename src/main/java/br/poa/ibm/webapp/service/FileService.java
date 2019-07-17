@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -34,7 +35,9 @@ public class FileService {
 					.build();
 
 			fileRepository.save(file);
-			values = this.readFile(file);
+
+			values.putAll(readFile(file));
+
 		}
 
 		return values;

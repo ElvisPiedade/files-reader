@@ -1,7 +1,10 @@
 package br.poa.ibm.webapp.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -27,17 +30,20 @@ public class SaleService {
 
 	public void save(List<String> list) {
 
-
 		for (String string : list) {
+			Double amount = 0.0;
 			String[] arr = string.split("ç");
 			List<Vendor> vendorList = new ArrayList<Vendor>();
 			Sale sale = new Sale();
-			vendorList.add(vendorRepository.findByName(arr[3]));
+			Vendor vendor = vendorRepository.findByName(arr[3]);
+			vendorList.add(vendor);
 
-			sale.setId(Long.parseLong(arr[1]));
+
+			sale.setNumber(Long.parseLong(arr[1]));
+
 			sale.setVendors(vendorList);
 
-			saleRepository.save(sale);
+
 
 			arr[2] = arr[2].substring(1, arr[2].length()-1);
 			String[] items = arr[2].split(",");
@@ -46,19 +52,41 @@ public class SaleService {
 				String[] values = s.split("-");
 
 				Product product = new Product();
-				product.setId(Long.parseLong(values[0]));
+				product.setNumber(Long.parseLong(values[0]));
 				product.setQuantity(Long.parseLong(values[1]));
 				product.setPrice(Double.parseDouble(values[2]));
 				product.setSale(sale);
-
+				amount += product.getQuantity()*product.getPrice();
 				productRepository.save(product);
 
 			}
+			sale.setAmount(amount);
+			saleRepository.save(sale);
 
+			if(vendor.getAmount() != null) {
+				vendor.setAmount(amount + vendor.getAmount());
+			}else {
+				vendor.setAmount(amount);
+			}
 
+			vendorRepository.save(vendor);
 
 		}
 	}
+
+
+	public Long findMostExpensive() {
+		List<Sale> list = saleRepository.findAll();
+		if(!list.isEmpty()) {
+			Collections.sort(list);
+			System.out.println(list.size());
+			return list.get(list.size()-1).getNumber();
+		}else {
+			return null;
+		}
+
+	}
+
 
 
 }

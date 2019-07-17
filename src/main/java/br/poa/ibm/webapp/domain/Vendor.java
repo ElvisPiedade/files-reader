@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Vendor {
+public class Vendor implements Comparable<Vendor>{
 
 	@Id
 	@GeneratedValue
@@ -25,10 +25,14 @@ public class Vendor {
 
 	private Double salary;
 
-	@ManyToMany
-    @JoinTable( name = "vendor_sale",
-			joinColumns = @JoinColumn(name = "vendor_id"),
-			inverseJoinColumns = @JoinColumn(name = "sale_id"))
+	private Double amount;
+
+	@ManyToMany(mappedBy="vendors")
 	private List<Sale> vendorSales;
+
+	@Override
+	public int compareTo(Vendor o) {
+		return this.getAmount().compareTo(o.getAmount());
+	}
 
 }
