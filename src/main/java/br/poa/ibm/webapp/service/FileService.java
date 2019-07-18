@@ -25,8 +25,16 @@ public class FileService {
 	}
 
 	public Map<String, List<String>> save(File file, Set<MultipartFile> myFile) throws IOException {
-		Map<String, List<String>> values = new HashMap<String, List<String>>();
+		Map<String, List<String>> values = new HashMap<>();
+		List<String> listVendor = new ArrayList<String>();
+		List<String> listCustomer = new ArrayList<String>();
+		List<String> listSale = new ArrayList<String>();
+		values.put("001", listVendor);
+		values.put("002", listCustomer);
+		values.put("003", listSale);
 
+		Map<String, List<String>> copy = new HashMap<>();
+		
 		for (MultipartFile f : myFile) {
 			file = File.builder()
 					.content(f.getBytes())
@@ -36,9 +44,17 @@ public class FileService {
 
 			fileRepository.save(file);
 
-			values.putAll(readFile(file));
+			copy.putAll(readFile(file));
+			listVendor = copy.get("001");
+			listCustomer = copy.get("002");
+			listSale = copy.get("003");
+
+			values.get("001").addAll(copy.get("001"));
+			values.get("002").addAll(copy.get("002"));
+			values.get("003").addAll(copy.get("003"));
 
 		}
+		
 
 		return values;
 
@@ -50,7 +66,7 @@ public class FileService {
 		List<String> listVendor = new ArrayList<String>();
 		List<String> listCustomer = new ArrayList<String>();
 		List<String> listSale = new ArrayList<String>();
-		Map<String, List<String>> values = new HashMap<String, List<String>>();
+		Map<String, List<String>> values = new HashMap<>();
 
 		for (String string : lines) {
 			String att[] = string.split("ç");
