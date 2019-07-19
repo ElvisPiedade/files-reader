@@ -30,14 +30,20 @@ public class VendorService {
 
 	public void save(List<String> list) {
 
-		for (String string : list) {
-			Vendor vendor = new Vendor();
-			String[] arr = string.split("ç");
-			vendor.setCpf(arr[1]);
-			vendor.setName(arr[2]);
-			vendor.setSalary(Double.parseDouble(arr[3]));
 
-			vendorRepository.save(vendor);
+		for (String string : list) {
+
+			String[] arr = string.split("ç");
+			if(vendorRepository.findByCpf(arr[1]) == null) {
+				Vendor vendor = new Vendor();
+
+				vendor.setCpf(arr[1]);
+				vendor.setName(arr[2]);
+				vendor.setSalary(Double.parseDouble(arr[3]));
+
+				vendorRepository.save(vendor);
+			}
+
 		}
 	}
 
@@ -46,7 +52,6 @@ public class VendorService {
 
 		if(!vendorList.isEmpty()) {
 			Collections.sort(vendorList);
-			System.out.println(vendorList.size());
 			return vendorList.get(0).getName();
 		}else {
 			return null;

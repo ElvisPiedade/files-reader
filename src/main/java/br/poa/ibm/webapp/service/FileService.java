@@ -34,27 +34,24 @@ public class FileService {
 		values.put("003", listSale);
 
 		Map<String, List<String>> copy = new HashMap<>();
-		
+
 		for (MultipartFile f : myFile) {
-			file = File.builder()
-					.content(f.getBytes())
-					.contentType(f.getContentType())
-					.createdOn(new Date())
-					.build();
+			if (f.getOriginalFilename().substring(f.getOriginalFilename().length() - 4).equals(".dat")) {
+				file = File.builder().content(f.getBytes()).contentType(f.getContentType()).createdOn(new Date())
+						.build();
 
-			fileRepository.save(file);
+				fileRepository.save(file);
 
-			copy.putAll(readFile(file));
-			listVendor = copy.get("001");
-			listCustomer = copy.get("002");
-			listSale = copy.get("003");
+				copy.putAll(readFile(file));
+				listVendor = copy.get("001");
+				listCustomer = copy.get("002");
+				listSale = copy.get("003");
 
-			values.get("001").addAll(copy.get("001"));
-			values.get("002").addAll(copy.get("002"));
-			values.get("003").addAll(copy.get("003"));
-
+				values.get("001").addAll(copy.get("001"));
+				values.get("002").addAll(copy.get("002"));
+				values.get("003").addAll(copy.get("003"));
+			}
 		}
-		
 
 		return values;
 
@@ -71,19 +68,23 @@ public class FileService {
 		for (String string : lines) {
 			String att[] = string.split("ç");
 
-			switch (att[0]) {
-			case "001":
-				listVendor.add(string);
-				break;
-			case "002":
-				listCustomer.add(string);
-				break;
-			case "003":
-				listSale.add(string);
-				break;
-			default:
-				System.out.println("printa alguma coisa");
+			if (att.length == 4) {
+				switch (att[0]) {
+				case "001":
+					listVendor.add(string);
+					break;
+				case "002":
+					listCustomer.add(string);
+					break;
+				case "003":
+					listSale.add(string);
+					break;
+				default:
+					System.out.println("printa alguma coisa");
+				}
+
 			}
+
 		}
 		values.put("001", listVendor);
 		values.put("002", listCustomer);

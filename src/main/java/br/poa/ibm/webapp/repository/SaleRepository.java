@@ -8,4 +8,6 @@ import br.poa.ibm.webapp.domain.Sale;
 @Repository
 public interface SaleRepository extends JpaRepository<Sale, Long> {
 
+	Sale findByNumber(Long saleNumber);
+
 }
